@@ -1,0 +1,84 @@
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/promoga_prelaunch/nextjs_space/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model WaitlistSignup {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  type      String?  // instructor, studio, student, both
+  interest  String?  // yoga, fitness, dance, all
+  instagramHandle String? @map("instagram_handle")
+  city            String?
+  role            String? // "solo_instructor" | "small_studio" | "larger_studio"
+  qualifiedAt     DateTime? @map("qualified_at")
+  // Signup status: pending_consent (Screen 1 done) → confirmed (Screen 2 done)
+  status          String   @default("pending_consent")
+  // CASL consent fields
+  caslConsent          Boolean  @default(false) @map("casl_consent")
+  caslConsentTimestamp DateTime? @map("casl_consent_timestamp")
+  caslConsentIp        String?  @map("casl_consent_ip")
+  formVersion          String?  @map("form_version")
+  // Savings calculator fields (optional, for leads from /savings-calculator)
+  source                  String?  // e.g. "hero", "waitlist_section", "savings_calculator"
+  monthlySpend            Float?   @map("monthly_spend")
+  annualSpend             Float?   @map("annual_spend")
+  aggregatorCommissionPct Float?   @map("aggregator_commission_pct")
+  estimatedSavings        Float?   @map("estimated_savings")
+  monthlyBookingRevenue   Float?   @map("monthly_booking_revenue")
+  calculatorMode          String?  @map("calculator_mode")
+  selectedTools           String?  @map("selected_tools")  // comma-separated tool IDs
+  // Unsubscribe (CASL: retain record for 3+ years, flag only)
+  unsubscribed    Boolean  @default(false)
+  unsubscribedAt  DateTime? @map("unsubscribed_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("waitlist_signups")
+}
+
+model CyaAccessCode {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  expiresAt   DateTime? @map("expires_at")
+  maxUses     Int       @default(1) @map("max_uses")
+  usedCount   Int       @default(0) @map("used_count")
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  redemptions CyaRedemption[]
+
+  @@map("cya_access_codes")
+}
+
+model CyaRedemption {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  studioName    String?  @map("studio_name")
+  codeId        String   @map("code_id")
+  code          CyaAccessCode @relation(fields: [codeId], references: [id])
+  // CASL consent
+  caslConsent          Boolean  @default(false) @map("casl_consent")
+  caslConsentTimestamp  DateTime? @map("casl_consent_timestamp")
+  caslConsentIp         String?  @map("casl_consent_ip")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("cya_redemptions")
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("contact_submissions")
+}

@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Suppress hydration errors */
+[data-hydration-error] {
+  display: none !important;
+}
+
+/* Custom CSS Variables - Promoga Brand */
+:root {
+  /* Primary Colors */
+  --color-primary-teal: #0A7E8C;
+  --color-secondary-coral: #F27059;
+  --color-tertiary-sage: #A8C5AA;
+  
+  /* Neutrals */
+  --color-neutral-dark: #2D3436;
+  --color-neutral-light: #FAF5F0;
+  --color-accent-amber: #F0B775;
+  
+  /* Utility */
+  --color-white: #FFFFFF;
+  --color-success: #4CAF50;
+  --color-error: #F44336;
+  
+  /* Typography */
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Sizes */
+  --text-hero: 3.5rem;
+  --text-h1: 2.5rem;
+  --text-h2: 2rem;
+  --text-h3: 1.5rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.8;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+}
+
+/* ===== Dark Mode — Savings Calculator Page ===== */
+.dark {
+  /* Dark mode design tokens (WCAG AA compliant) */
+  --dm-tx: #cdccca;       /* primary text — ~12:1 against bg */
+  --dm-txm: #979694;      /* muted text — ~5.5:1 */
+  --dm-txf: #5a5957;      /* faint text — decorative/footnotes only */
+  --dm-bg: #171614;       /* page background */
+  --dm-surf: #1c1b19;     /* card surfaces */
+  --dm-surf2: #201f1d;    /* elevated surfaces */
+  --dm-bord: #393836;     /* borders */
+  --dm-pr: #4f98a3;       /* teal accent — lightened for dark bg */
+  --dm-input-bg: #201f1d; /* input backgrounds */
+  --dm-chip-bg: #2d2c2a;
+  --dm-chip-active: #1f4e54;
+
+  --color-neutral-dark: var(--dm-tx);
+  --color-neutral-light: var(--dm-bg);
+  color-scheme: dark;
+}
+
+/* Dark mode surface overrides */
+.dark body {
+  background-color: var(--dm-bg);
+  color: var(--dm-tx);
+}
+
+/* Surfaces */
+.dark .bg-white { background-color: var(--dm-surf) !important; }
+.dark .bg-gray-50 { background-color: var(--dm-surf2) !important; }
+.dark .bg-neutral-light { background-color: var(--dm-bg) !important; }
+
+/* Borders */
+.dark .border-gray-100 { border-color: rgba(255,255,255,0.06) !important; }
+.dark .border-gray-200 { border-color: var(--dm-bord) !important; }
+.dark .border-gray-300 { border-color: rgba(255,255,255,0.14) !important; }
+
+/* Primary text — headings, tool names, table cells, FAQ questions, body */
+.dark .text-neutral-dark { color: var(--dm-tx) !important; }
+.dark .text-gray-800 { color: var(--dm-tx) !important; }
+.dark .text-gray-900 { color: var(--dm-tx) !important; }
+.dark .font-semibold.text-neutral-dark { color: var(--dm-tx) !important; }
+
+/* Muted text — subtitles, labels, sublines, FAQ answers */
+.dark .text-gray-600 { color: var(--dm-txm) !important; }
+.dark .text-gray-700 { color: var(--dm-txm) !important; }
+.dark .text-gray-500 { color: var(--dm-txm) !important; }
+
+/* Faint text — footnotes only */
+.dark .text-neutral-dark\/35 { color: var(--dm-txf) !important; }
+/* Small labels, subtitles, attributions — match muted text for readability */
+.dark .text-neutral-dark\/40 { color: var(--dm-txm) !important; }
+
+/* Muted opacity text (subtitles, descriptions, trust items) */
+.dark .text-neutral-dark\/50 { color: var(--dm-txm) !important; }
+.dark .text-neutral-dark\/60 { color: var(--dm-txm) !important; }
+.dark .text-neutral-dark\/70 { color: var(--dm-tx) !important; }
+
+/* Teal accent — lightened for dark backgrounds */
+.dark .text-teal { color: var(--dm-pr) !important; }
+
+/* Results panel savings figure */
+.dark .text-emerald-600 { color: #66bb6a !important; }
+
+/* Inputs */
+.dark input, .dark select, .dark textarea {
+  background-color: var(--dm-input-bg) !important;
+  color: var(--dm-tx) !important;
+  border-color: var(--dm-bord) !important;
+}
+.dark input::placeholder { color: var(--dm-txf) !important; }
+.dark input:focus { border-color: var(--dm-pr) !important; }
+
+/* Revenue chips — unselected */
+.dark .border-gray-200.bg-gray-50 {
+  background-color: var(--dm-chip-bg) !important;
+  border-color: var(--dm-bord) !important;
+}
+.dark .border-gray-200.bg-gray-50 span { color: var(--dm-txm) !important; }
+
+/* Revenue chips — selected (teal) */
+.dark .border-teal.bg-teal-50 {
+  background-color: var(--dm-chip-active) !important;
+  border-color: var(--dm-pr) !important;
+}
+.dark .border-teal.bg-teal-50 span { color: #ffffff !important; }
+
+/* Teal-50 background surfaces */
+.dark .bg-teal-50 { background-color: rgba(79,152,163,0.12) !important; }
+.dark .bg-teal-50\/20 { background-color: rgba(79,152,163,0.08) !important; }
+
+/* Amber / warning badges */
+.dark .bg-amber-100 { background-color: rgba(251,191,36,0.15) !important; }
+.dark .text-amber-700 { color: #fbbf24 !important; }
+
+/* Shadows */
+.dark .shadow-sm { box-shadow: 0 1px 3px rgba(0,0,0,0.35) !important; }
+.dark .shadow-md { box-shadow: 0 4px 16px rgba(0,0,0,0.45) !important; }
+.dark .shadow-lg { box-shadow: 0 12px 40px rgba(0,0,0,0.6) !important; }
+
+/* Hover states */
+.dark .hover\:bg-gray-50:hover { background-color: #282622 !important; }
+
+/* Rounded elements (cards, panels) */
+.dark .bg-white.rounded-xl,
+.dark .bg-white.rounded-2xl,
+.dark .bg-white.rounded-lg { background-color: var(--dm-surf) !important; }
+
+/* Footer & bottom bar */
+.dark .bg-white.fixed { background-color: var(--dm-surf) !important; }
+
+/* Gray backgrounds used in sections */
+.dark .bg-gray-100 { background-color: var(--dm-surf2) !important; }
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-white);
+  color: var(--color-neutral-dark);
+  line-height: var(--line-height-normal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: var(--line-height-tight);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Section padding */
+.section-padding {
+  padding: var(--space-3xl) 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-neutral-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-teal);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #086974;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Focus styles */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid var(--color-primary-teal);
+  outline-offset: 2px;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-primary-teal);
+  color: white;
+}
+
+/* Savings calculator page - seam fix */
+.savings-calculator-page .hero-section {
+  margin-top: -1px;
+  padding-top: 1px;
+}
